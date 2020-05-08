@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/thgao/GCPStarterProjectJS/issues"
   },
-  "homepage": "https://github.com/thgao/GCPStarterProjectJS#readme"
+  "homepage": "https://github.com/thgao/GCPStarterProjectJS#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
