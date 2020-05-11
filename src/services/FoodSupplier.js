@@ -16,21 +16,24 @@ export default class FoodSupplier {
                 vendor.addIngredient("peach", price, stock2);
             }
             let stock3 = Math.floor(Math.random() * 5);
-            if(stock1 !== 0){
+            if(stock3 !== 0){
                 let price = (Math.random() * 4).toFixed(2);
                 vendor.addIngredient("pear", price, stock3);
             }
             this.vendors.push(vendor);
         }
     
-        this.getVendorsWithIngredient = (ingredient) => {
-            console.log(this.vendors);
+        this.getVendorsWithIngredient = async (ingredient) => {
+            let delay = Math.random()*3000 + 500;
+            await new Promise(r => setTimeout(r, delay));
+            // console.log(this.vendors);
             let matches = [];
             for(let i = 0; i < this.vendors.length; i++) {
                 if(this.vendors[i].hasIngredient(ingredient)) {
                     matches.push(this.vendors[i]);
                 }
             }
+            // console.log(matches)
             return matches;
         }
     }

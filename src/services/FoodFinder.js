@@ -2,8 +2,9 @@ export default class FoodFinder {
     constructor(foodSupplier) {
         this.foodSupplier = foodSupplier;
     
-        this.findIngredient = (ingredient) => {
-            let vendors = this.foodSupplier.getVendorsWithIngredient(ingredient);
+        this.findIngredient = async (ingredient) => {
+            let vendors = await this.foodSupplier
+                 .getVendorsWithIngredient(ingredient)
             let ingredientData = {};
             for (let i = 0; i < vendors.length; i++){
                 ingredientData[vendors[i].getName()] = {};
@@ -12,6 +13,8 @@ export default class FoodFinder {
                 ingredientData[vendors[i].getName()].stock = 
                     vendors[i].getStock(ingredient);
             }
+            // console.log("here")
+            // console.log(ingredientData);
             return ingredientData;
         }
     }
