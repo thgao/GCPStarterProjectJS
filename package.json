@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/thgao/GCPStarterProjectJS#readme",
   "dependencies": {
+    "esm": "^3.2.25",
     "express": "^4.17.1"
   }
 }
