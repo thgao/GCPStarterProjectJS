@@ -1,7 +1,8 @@
 export default class FoodVendor {
-    constructor(name) {
+    constructor(name, tracer) {
         this.name = name;
         this.ingedients = {};
+        this.tracer = tracer;
     
         this.addIngredient = (ingedient, price, stock) => {
             this.ingedients[ingedient] = {};
@@ -20,10 +21,17 @@ export default class FoodVendor {
         }
 
         this.hasIngredient = (ingedient) => {
-            if(this.ingedients[ingedient] == null){
-                return false;
-            } 
-            return true;
+            const span = this.tracer.startSpan("hasIngredient", 
+            { parent: this.tracer.getCurrentSpan() });
+            return this.tracer.withSpan(span, () => {
+                if(this.ingedients[ingedient] == null){
+                    span.end()
+                    return false;
+                } 
+                span.end()
+                return true;
+            })
+           
         }
     }
 }

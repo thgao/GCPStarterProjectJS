@@ -18,7 +18,17 @@
   },
   "homepage": "https://github.com/thgao/GCPStarterProjectJS#readme",
   "dependencies": {
+    "@google-cloud/opentelemetry-cloud-trace-exporter": "^0.3.0",
+    "@opentelemetry/api": "^0.8.0",
+    "@opentelemetry/core": "^0.8.0",
+    "@opentelemetry/exporter-zipkin": "^0.8.0",
+    "@opentelemetry/node": "^0.8.0",
+    "@opentelemetry/plugin-express": "^0.7.0",
+    "@opentelemetry/plugin-http": "^0.8.0",
+    "@opentelemetry/tracing": "^0.8.0",
     "esm": "^3.2.25",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "install": "^0.13.0",
+    "npm": "^6.14.5"
   }
 }
