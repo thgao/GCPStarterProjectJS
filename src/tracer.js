@@ -26,7 +26,7 @@ const traceExporter = new TraceExporter({
 
 const tracerProvider = new NodeTracerProvider({
   plugins: {
-    http: {
+    express: {
       enabled: true,
       // You may use a package name or absolute path to the file.
       path: '@opentelemetry/plugin-express',
