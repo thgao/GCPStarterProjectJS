@@ -1,8 +1,8 @@
 'use strict';
-const tracer = require('./tracer')('example-express-server');
+const tracer = require('../tracer')('example-express-server');
 import express from 'express'
-import FoodSupplier from './services/FoodSupplier.js'
-import FoodFinder from './services/FoodFinder.js'
+import FoodSupplier from '../services/FoodSupplier.js'
+import FoodFinder from '../services/FoodFinder.js'
 const { MeterProvider } = require("@opentelemetry/metrics");
 const { PrometheusExporter } = require("@opentelemetry/exporter-prometheus");
 const opentelemetry = require('@opentelemetry/api');
@@ -51,7 +51,8 @@ function setup () {
   console.log("Server running on port 8080");
   });
 
-  app.get("/find/:ingredient", (req, res, next) => {
+  app.get("/find-server/:ingredient", (req, res, next) => {
+      console.log('app.get');
       const requestReceived = new Date().getTime();
       const span = tracer.startSpan("app.get ot");
       tracer.withSpan(span, async () => {  
