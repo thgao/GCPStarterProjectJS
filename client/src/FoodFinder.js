@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Button, Row, Col } from 'reactstrap';
 
 
+const gcpBase = 'https://healthy-earth-276916.ue.r.appspot.com';
+const localBase = 'http://penguin.termina.linux.test:8080';
+
 class FoodFinder extends Component {
     constructor(){
         super()
@@ -13,9 +16,15 @@ class FoodFinder extends Component {
 
     buttonHandler(ingredient) {
         this.setState({isLoading: true})
-        fetch('/find-server/' + ingredient)
-            .then(res => res.json())
-            .then(data => {
+        // alert('fetching ' + ingredient);
+        fetch(gcpBase + '/find-server/' + ingredient)
+            .then(res => {
+                // alert(res);
+                let json = res.json()
+                // alert(json);
+                return json
+            }).then(data => {
+                // alert("then?")
                 this.setState(
                     {results: data, 
                     ingredient: ingredient,

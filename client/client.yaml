@@ -1,3 +1,6 @@
 service: client
 env: flex
 runtime: nodejs
+handlers:
+- url: /find-server/.*
+  script: auto

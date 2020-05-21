@@ -1,11 +1,14 @@
 'use strict';
 const tracer = require('../tracer')('example-express-server');
 import express from 'express'
+import path from 'path'
 import FoodSupplier from '../services/FoodSupplier.js'
 import FoodFinder from '../services/FoodFinder.js'
 const { MeterProvider } = require("@opentelemetry/metrics");
 const { PrometheusExporter } = require("@opentelemetry/exporter-prometheus");
 const opentelemetry = require('@opentelemetry/api');
+var cors = require('cors')
+
 
 const prometheusPort = 8081;
 const exporter = new PrometheusExporter(
@@ -46,18 +49,22 @@ const labels = { metricOrigin: process.env.ENV};
 function setup () {
   let foodSupplier = new FoodSupplier(tracer);
   let foodFinder = new FoodFinder(foodSupplier, tracer);
+  app.use(cors())
+  app.use(express.static(path.join(__dirname, '../../../client/build')));
+  console.log(__dirname);
 
   app.listen(8080, () => {
   console.log("Server running on port 8080");
   });
 
-  app.get("/find-server/:ingredient", (req, res, next) => {
+ app.get("/find-server/:ingredient", (req, res, next) => {
       console.log('app.get');
       const requestReceived = new Date().getTime();
       const span = tracer.startSpan("app.get ot");
       tracer.withSpan(span, async () => {  
         let list = await foodFinder.findIngredient(req.params.ingredient);
         res.json(list);
+        //res.send(list);
         const measuredLatency = new Date().getTime() - requestReceived;
         responseLatency.bind(labels).add(measuredLatency)
         // console.log("frontend");
