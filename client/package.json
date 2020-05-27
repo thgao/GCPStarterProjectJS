@@ -6,7 +6,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@opentelemetry/exporter-collector": "^0.8.1",
+    "@opentelemetry/context-zone": "^0.8.1",
+    "@opentelemetry/exporter-collector": "^0.8.2",
     "@opentelemetry/plugin-document-load": "^0.7.0",
     "@opentelemetry/tracing": "^0.8.1",
     "@opentelemetry/web": "^0.8.1",

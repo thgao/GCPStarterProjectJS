@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: starter-project-kube-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: starter-project-kube
+  template:
+    metadata:
+      labels:
+        app: starter-project-kube
+    spec:
+      containers:
+      - name: starter-project-kube-app
+        # Replace with your project ID
+        image: gcr.io/healthy-earth-276916/starter-project-kube:latest
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /healthcheck
+            port: 8080
+        env:
+          - name: PORT
+            value: "8080"
