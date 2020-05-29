@@ -16,7 +16,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ot-service-conf
+  name: sp-ot-service-conf
   namespace: default
 data:
   ot-service-config: |
@@ -46,40 +46,40 @@ data:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: ot-service-deployment
+  name: sp-ot-service-deployment
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: ot-service-deployment
+        app: sp-ot-service-deployment
     spec:
       containers:
-        - name: ot-service-container
+        - name: sp-ot-service-container
           image: gcr.io/healthy-earth-276916/otelcontribcol:latest
           volumeMounts:
-            - name: ot-service-config-vol
+            - name: sp-ot-service-config-vol
               readOnly: true
               mountPath: /conf
-          args: ["--config=/conf/ot-service-config.yaml"]
+          args: ["--config=/conf/sp-ot-service-config.yaml"]
           ports:
             - containerPort: 55678
       volumes:
-        - name: ot-service-config-vol
+        - name: sp-ot-service-config-vol
           configMap:
-            name: ot-service-conf
+            name: sp-ot-service-conf
             items:
-              - key: ot-service-config
-                path: ot-service-config.yaml
+              - key: sp-ot-service-config
+                path: sp-ot-service-config.yaml
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: ot-service-service
+  name: sp-ot-service-service
 spec:
   type: LoadBalancer
   selector:
-    app: ot-service-deployment
+    app: sp-ot-service-deployment
   ports:
     - protocol: TCP
       port: 80

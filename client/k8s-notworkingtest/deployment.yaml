@@ -1,21 +1,21 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: web-instrumentation-deployment
+  name: starter-project-kube-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: web-instrumentation
+      app: starter-project-kube
   template:
     metadata:
       labels:
-        app: web-instrumentation
+        app: starter-project-kube
     spec:
       containers:
-      - name: web-instrumentation-app
+      - name: starter-project-kube-app
         # Replace with your project ID
-        image: gcr.io/healthy-earth-276916/web-instrumentation:latest
+        image: gcr.io/healthy-earth-276916/starter-project-kube:latest
         ports:
         - containerPort: 8080
         readinessProbe:

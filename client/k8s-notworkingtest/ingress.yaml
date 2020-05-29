@@ -1,12 +1,12 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: web-instrumentation-ingress
+  name: starter-project-kube-ingress
 spec:
   rules:
   - http:
       paths:
       - path: /*
         backend:
-          serviceName: web-instrumentation
+          serviceName: starter-project-kube
           servicePort: 80
