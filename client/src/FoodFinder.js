@@ -25,7 +25,7 @@ class FoodFinder extends Component {
         console.log(tracer);
         console.log(tracer.getCurrentSpan());
         const span = tracer.startSpan("fe /find-server/:ingredient");
-        span.setAttribute('ingredient', 'value');
+        span.setAttribute('ingredient', ingredient);
         fetch(gcpBase + '/find-server/' + ingredient)
             .then(res => {
                 this.tracer.withSpan(span, () => {
